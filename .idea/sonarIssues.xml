@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="$PROJECT_DIR$/mscgen-core/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/AA.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/App.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/msdl/EnumModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/msdl/em/EnumField.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/msdl/em/EnumModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/msdl/enum/EnumModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/scgen/Generator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/scgen/Status.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/scgen/model/EnumModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/scgen/msdl/em/EnumField.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/scgen/msdl/em/EnumModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/java/mtime/codegen/scgen/utils/Log.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mscgen-core/src/main/resources/template/enum.vm">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/IdeaProjects_new/mscgen/mscgen-core/src/main/resources/xsl/enum.vm">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/IdeaProjects_new/mscgen/mscgen-core/src/main/resources/xsl/enum.xsl">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/IdeaProjects_new/mscgen/mscgen-demo/src/main/msdl/SaleStrategy.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/IdeaProjects_new/mscgen/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

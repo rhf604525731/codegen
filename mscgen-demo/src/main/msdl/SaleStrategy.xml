@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root javaPackageBase="mx.ticket.price.admin.service" version="0.2" dtoStyle="pojo">
+    <services description="票务销售策略服务">
+        <service name="SaleStrategy" description="票务销售策略服务，制定管理售价等。">
+            <method name="CreateStrategy" description="创建销售策略">
+                <request>
+                    <field modifier="required" type="int32" name="Name" order="1" description="策略名称"/>
+                    <field modifier="optional" type="string" name="Code" order="2" description="策略编码，一般对纸质策略对应"/>
+                    <field modifier="required" type="int32" name="Type" order="3" description="策略类型"
+                           enum="SaleStrategyType"/>
+                    <field modifier="required" type="int64" name="ValidFrom" order="4" description="策略生效时间"/>
+                    <field modifier="required" type="int64" name="ValidTo" order="5" description="策略失效时间"/>
+                    <field modifier="optional" type="int32" name="enum2" order="6" enum="PromoStrategyStatus"/>
+                    <field modifier="repeated" type="int32" name="enum3" order="7" enum="PromoStrategyStatus"/>
+                    <field modifier="optional" type="bytes" name="bytes1" order="8"/>
+                    <field modifier="optional" type="int32" name="intObj" order="9" javaType="Integer"/>
+                </request>
+                <response>
+                    <field modifier="required" type="int32" name="Id" order="1" description="新建的价格策略ID"/>
+                </response>
+                <errors>
+                    <error name="NAME_DUPLICATE" code="1001" message="名字重复"/>
+                    <error name="TIME_OVERLAP" code="1021" message="有效时间交叉"/>
+                </errors>
+            </method>
+            <method name="UpdateStrategy" description="更新销售策略">
+                <request>
+                    <field modifier="required" type="int32" name="Id" order="1" description="价格策略ID"/>
+                    <field modifier="optional" type="string" name="Name" order="2" description="价格策略名称"/>
+                </request>
+                <!--<response>-->
+                <!--</response>-->
+                <errors>
+                    <error name="NAME_DUPLICATE" code="1001" message="名字重复"/>
+                    <error name="TIME_OVERLAP" code="1021" message="有效时间交叉"/>
+                </errors>
+            </method>
+            <method name="SetStrategyStatus" description="设置策略状态">
+                <request>
+                    <field modifier="required" type="int32" name="Id" order="1" description="价格策略ID"/>
+                    <field modifier="required" type="int32" name="Status" order="2" description="价格策略状态"/>
+                    <field modifier="optional" type="string" name="Note" order="3" description="备注"/>
+                </request>
+                <response>
+                </response>
+            </method>
+            <method name="FindStrategies" description="查找销售策略">
+                <request>
+                    <field modifier="optional" type="PageInfo" name="PageInfo"
+                           order="1" description="分页信息"/>
+                    <field modifier="optional" type="int32" name="Status" order="2"
+                           description="策略状态，零表示忽略此条件" enum="SaleStrategyStatus"/>
+                </request>
+                <response>
+                    <field modifier="required" type="int32" name="TotalCount" order="1" description="总页数"/>
+                    <field modifier="repeated" type="SaleStrategy" name="Strategies" order="2"/>
+                </response>
+            </method>
+            <method name="GetStrategy" description="获取策略策略">
+                <request>
+                    <field modifier="required" type="int32" name="ID" order="1" description="价格策略ID"/>
+                </request>
+                <response>
+                    <field modifier="optional" type="SaleStrategy" name="Strategy" order="1"/>
+                </response>
+            </method>
+            <method name="GetRunningStrategies" description="获取开放中以及即生效的策略。">
+                <!--<request>-->
+                <!--<field modifier="optional" type="int32" name="PreLoadInterval"-->
+                <!--order="1" description="提前多久预加载即将生效的策略，单位分钟"/>-->
+                <!--</request>-->
+                <response>
+                    <field modifier="repeated" type="SaleStrategy" name="Strategies" order="1"/>
+                </response>
+            </method>
+        </service>
+    </services>
+    <protoImports>
+        <protoImport path="Common.proto.global"/>
+    </protoImports>
+    <dataTypes>
+        <imports>
+            <import path="mtime.lark.util.data.PageInfo"/>
+            <import path="mx.ticket.price.front.service.constant.*"/>
+        </imports>
+        <dataType name="SaleStrategy" description="销售策略">
+            <field modifier="required" type="int32" name="ID" order="20" description="价格策略ID"/>
+            <field modifier="required" type="int32" name="Name" order="1" description="策略名称"/>
+            <field modifier="optional" type="string" name="Code" order="2" description="策略编码，一般对纸质策略对应"/>
+            <field modifier="required" type="int32" name="Type" order="3" description="策略类型" enum="SaleStrategyType"/>
+            <field modifier="required" type="int64" name="ValidFrom" order="4" description="策略生效时间"/>
+            <field modifier="required" type="int64" name="ValidTo" order="5" description="策略失效时间"/>
+            <field modifier="required" type="bool" name="CanApprove" order="21" description="是否可以执行审核"/>
+            <field modifier="required" type="bool" name="CanClose" order="22" description="是否可以关闭"/>
+        </dataType>
+    </dataTypes>
+    <enums>
+        <enum name="SaleStrategyType" description="策略类型">
+            <field name="Primary" value="1" description="主策略"/>
+            <field name="Secondary" value="2" description="补充策略"/>
+        </enum>
+        <enum name="SaleStrategyStatus" description="价格策略状态常量">
+            <field name="New" value="1" description="新策略"/>
+            <field name="Approved" value="2" description="审批通过"/>
+            <field name="Rejected" value="3" description="驳回"/>
+        </enum>
+        <enum name="SaleStrategyType" description="价格策略类型">
+            <field name="Regular" value="1" description="通用"/>
+            <field name="Activity" value="2" description="活动"/>
+        </enum>
+        <enum name="SeatType" description="作为类型">
+            <field name="Normal" value="1" code="N" description="普通"/>
+            <field name="Held" value="2" code="H" description="保留"/>
+            <field name="Wheel" value="3" code="W" description="轮椅"/>
+        </enum>
+    </enums>
+    <errors>
+        <error name="NAME_DUPLICATE" code="1001" message="名字重复"/>
+        <error name="TIME_OVERLAP" code="1021" message="有效时间交叉"/>
+        <error name="not_Exist" code="1023" message="有效时间交叉"/>
+        <error name="AhaOops" code="1023" message="有效时间交叉"/>
+    </errors>
+</root>

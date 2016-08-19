@@ -1,0 +1,49 @@
+﻿<html>
+	<head>
+		<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>$!{serviceDescription} 接口定义</title>
+	</head>
+	<body>
+<h2>$!{serviceDescription} (${serviceName})</h2>
+#foreach($method in $methods)
+<h3>$!{method.description} (${method.name})</h3>
+<h4>请求参数</h4>
+<table>
+    <tr>
+        <th>名称</th>
+        <th>类型</th>
+        <th>必填</th>
+        <th>说明</th>
+    </tr>
+    #set($requests = $method.requests)
+    #foreach($p in $requests)
+    <tr>
+        <td>$p.name</td>
+        <td>$p.type</td>
+        <td>$p.isNull</td>
+        <td>$!{p.description}</td>
+    </tr>
+    #end
+</table>
+
+<h4>返回参数</h4>
+<table>
+    <tr>
+        <th>名称</th>
+        <th>类型</th>
+        <th>必填</th>
+        <th>说明</th>
+    </tr>
+    #set($responses = $method.responses)
+    #foreach($p in $responses)
+    <tr>
+        <td>$p.name</td>
+        <td>$p.type</td>
+        <td>$p.isNull</td>
+        <td>$!{p.description}</td>
+    </tr>
+    #end
+</table>
+#end
+    </body>
+</html>

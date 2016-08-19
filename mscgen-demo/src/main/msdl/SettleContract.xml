@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root javaPackageBase="mx.ticket.price.admin.service">
+    <services description="票务结算合同服务">
+        <service name="SettleContract" description="票务结算合同服务，制定管理结算价、票房价等。">
+            <method name="CreateContract" description="创建结算合同">
+                <request>
+                    <field modifier="required" type="string" name="Name" order="1" description="合同名称"/>
+                    <field modifier="optional" type="string" name="Code" order="2" description="合同编码，一般对纸质合同对应"/>
+                    <field modifier="required" type="int32" name="Type" order="3" description="合同类型"
+                           enum="SettleContractType"/>
+                    <field modifier="required" type="int64" name="ValidFrom" order="4" description="合同生效时间"/>
+                    <field modifier="required" type="int64" name="ValidTo" order="5" description="合同失效时间"/>
+                    <!--<field modifier="required" type="int32" name="Target" order="3" description="合同对象，平台、院线、影院"/>-->
+                    <!--<field modifier="required" type="int32" name="IsCinemaSubsidy" order="3" description="是否影院补贴，适用于补充合同，如果是，结算价可以低于限价"/>					-->
+                    <!--<field modifier="required" type="int32" name="Priority" order="3" description="合同优先级，适用于补充合同"/>-->
+                    <!--<field modifier="required" type="int32" name="CinemaId" order="2" description="影院ID"/>-->
+                    <!--<field modifier="required" type="int32" name="CinemaPlatformId" order="3" description="影院平台ID"/>-->
+                    <!--<field modifier="required" type="int32" name="CinemaHallId" order="4" description="影厅ID"/>-->
+                    <!--<field modifier="required" type="int32" name="MovieId" order="5" description="影片ID"/>-->
+                    <!--<field modifier="required" type="int32" name="MovieEditions" order="6" description="影片版本"/>-->
+                </request>
+                <response>
+                    <field modifier="required" type="int32" name="Id" order="1" description="新建的合同ID"/>
+                </response>
+            </method>
+            <method name="UpdateContract" description="更新结算合同">
+                <request>
+                    <field modifier="required" type="int32" name="Id" order="1" description="合同ID"/>
+                    <field modifier="optional" type="string" name="Name" order="2" description="合同名称"/>
+                </request>
+                <response>
+                </response>
+            </method>
+            <method name="SetContractStatus" description="设置合同状态">
+                <request>
+                    <field modifier="required" type="int32" name="Id" order="1" description="合同ID"/>
+                    <field modifier="required" type="int32" name="Status" order="2" description="合同状态"/>
+                    <field modifier="optional" type="string" name="Note" order="3" description="备注"/>
+                </request>
+                <response>
+                </response>
+            </method>
+            <method name="FindContracts" description="查找结算合同">
+                <request>
+                    <field modifier="optional" type="PageInfo" name="PageInfo"
+                           order="1" description="分页信息"/>
+                    <field modifier="optional" type="int32" name="Status" order="2"
+                           description="合同状态，零表示忽略此条件" enum="SettleContractStatus"/>
+                    <field modifier="repeated" type="int32" name="intList" order="6" description=""/>
+                </request>
+                <response extends="SimpleListResponse[SettleContract]"/>
+                <!--<response implements="PageResultSet[SettleContract]">-->
+                <!--<field modifier="required" type="int32" name="totalCount" order="1"/>-->
+                <!--<field modifier="repeated" type="SettleContract" name="items" order="2"/>-->
+                <!--</response>-->
+            </method>
+            <method name="GetContract" description="获取结算合同">
+                <request>
+                    <field modifier="required" type="int32" name="Id" order="1" description="合同ID" javaType="Integer"/>
+                </request>
+                <response>
+                    <field modifier="optional" type="SettleContract" name="Contract" order="1"/>
+                </response>
+            </method>
+            <method name="GetRunningContracts" description="获取开放中以及即生效的合同。">
+                <request>
+                    <field modifier="optional" type="int32" name="PreLoadInterval"
+                           order="1" description="提前多久预加载即将生效的合同，单位分钟"/>
+                </request>
+                <response>
+                    <field modifier="repeated" type="SettleContract" name="Contracts" order="1"/>
+                </response>
+            </method>
+        </service>
+    </services>
+    <protoImports>
+        <protoImport path="Common.proto.global"/>
+    </protoImports>
+    <dataTypes>
+        <imports>
+            <import path="mtime.lark.net.rpc.util.PageInfo"/>
+            <import path="mtime.lark.net.rpc.util.SimpleListResponse"/>
+            <import path="org.springframework.format.annotation.DateTimeFormat"/>
+        </imports>
+        <dataType name="SettleContract" description="结算合同">
+            <field modifier="required" type="int32" name="Id" order="20" description="合同ID"/>
+            <field modifier="required" type="string" name="Name" order="1" description="合同名称"/>
+            <field modifier="optional" type="string" name="Code" order="2" description="合同编码，一般对纸质合同对应"/>
+            <field modifier="required" type="int32" name="Type" order="3" description="合同类型" enum="SettleContractType"/>
+            <field modifier="required" type="int64" name="ValidFrom" order="4" description="合同生效时间"
+                   javaType="LocalDateTime" javaAnnotations="DateTimeFormat(iso = DateTimeFormat.ISO.DATE)"/>
+            <field modifier="required" type="int64" name="ValidTo" order="5" description="合同失效时间"
+                   javaType="LocalDateTime"/>
+            <field modifier="required" type="int64" name="ValidTo2" order="50" description="合同失效时间"
+                   javaType="LocalDate"/>
+            <field modifier="required" type="int32" name="Status" order="6" description="合同状态"
+                   enum="SettleContractStatus"/>
+            <!--<field modifier="required" type="int32" name="CinemaId" order="2" description="影院ID"/>-->
+            <!--<field modifier="required" type="int32" name="CinemaPlatformId" order="3" description="影院平台ID"/>-->
+            <!--<field modifier="required" type="int32" name="CinemaHallId" order="4" description="影厅ID"/>-->
+            <!--<field modifier="required" type="int32" name="MovieId" order="5" description="影片ID"/>-->
+            <!--<field modifier="required" type="int32" name="MovieEditions" order="6" description="售价"/>-->
+            <field modifier="required" type="bool" name="CanApprove" order="21"
+                   description="是否可以执行审核"/>
+            <field modifier="required" type="bool" name="CanClose" order="22"
+                   description="是否可以关闭"/>
+        </dataType>
+    </dataTypes>
+    <enums>
+        <enum name="SettleContractType" description="合同类型">
+            <field name="Primary" value="1" description="主合同"/>
+            <field name="Secondary" value="2" description="补充合同"/>
+        </enum>
+        <enum name="SettleContractTarget" description="合同对象">
+            <field name="Theater" value="1" description="影院"/>
+            <field name="TheaterChain" value="2" description="院线"/>
+            <field name="Platform" value="3" description="平台"/>
+        </enum>
+        <enum name="SettleContractStatus" description="合同状态常量">
+            <field name="New" value="1" description="新合同"/>
+            <field name="Approved" value="2" description="审核通过"/>
+            <field name="Rejected" value="3" description="审批拒绝"/>
+        </enum>
+    </enums>
+</root>

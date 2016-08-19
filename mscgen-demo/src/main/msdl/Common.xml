@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root javaPackageBase="mx.ticket.price.admin.service">
+    <dataTypes>
+        <dataType name="PageInfo" description="分页信息">
+            <field modifier="required" type="int32" name="PageIndex" order="1" description="页码，从 1 开始"/>
+            <field modifier="required" type="int32" name="PageSize" order="2" description="每页大小"/>
+        </dataType>
+    </dataTypes>
+</root>

@@ -1,0 +1,66 @@
+package $pkg;
+
+/**
+ * $!{errorsNode.attributeValue("description")}
+ */
+@Description("$!{errorsNode.attributeValue("description")}")
+public enum $errEnumName{
+
+    #foreach($e in $errorNodes)
+${gen.normalizeConstantName($e.attributeValue("name"))}(${e.attributeValue("code")}, "${e.attributeValue("message")}")#if($foreach.count < $errorNodes.size()),
+#else;#end
+    #end
+
+
+    private int code;
+    private String message;
+
+    $errEnumName(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    @Override
+    public String displayName() {
+        return this.message;
+    }
+
+    @Override
+    public int value() {
+        return this.code;
+    }
+
+    /*
+     * 错误代码
+     * @deprecated 使用 getCode 替代
+    */
+    @Deprecated
+    public int code() {
+        return this.code;
+    }
+
+    /*
+     * 错误代码
+    */
+    public int getCode() {
+        return this.code;
+    }
+
+    /*
+     * 错误信息
+    */
+    public String getMessage() {
+        return this.message;
+    }
+
+    /*
+     * 错误信息
+     * @deprecated 使用 getMessage 替代
+    */
+    @Deprecated
+    public String message() {
+        return this.message;
+    }
+
+
+}
